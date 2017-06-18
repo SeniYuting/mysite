@@ -1,0 +1,544 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{{STATIC_URL}}css/templatemo_style.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript" type="text/javascript">
+function clearText(field)
+{
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="{{image}}"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/highcharts.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/highcharts-more.js" ></script>
+
+  
+    <script>
+    $(function () {
+
+	$('#image1').highcharts({
+	            
+	    chart: {
+	        polar: true,
+	        type: 'line'
+	    },
+	    
+	    title: {
+	        text: 'Amazon vs other merchants',
+	        x: -80
+	    },
+	    
+	    pane: {
+	    	size: '80%'
+	    },
+	    
+	    xAxis: {
+	        categories: {{list1_1|safe}},
+		   //categories:['2013/10/26', '2013/11/10', '2013/11/17', '2013/12/23', '2014/01/31', '2014/02/18', '2014/03/04', '2014/04/23', '2014/05/08'],
+	        tickmarkPlacement: 'on',
+	        lineWidth: 0
+	    },
+	        
+	    yAxis: {
+	        gridLineInterpolation: 'polygon',
+	        lineWidth: 0,
+	        min: 0
+	    },
+	    
+	    tooltip: {
+	    	shared: true,
+	        pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+	    },
+	    
+	    legend: {
+	        align: 'right',
+	        verticalAlign: 'top',
+	        y: 70,
+	        layout: 'vertical'
+	    },
+	    
+	    series: [{
+	        name: 'Amazon_pricelist',
+	        data: {{list1_2}},
+	        pointPlacement: 'on'
+	    }, {
+	        name: 'other_avg_price_list',
+	        data: {{list1_3}},
+	        pointPlacement: 'on'
+	    }]
+	
+	});
+});	
+  </script>
+  
+    <script>
+$(function () {
+    $('#image2').highcharts({
+
+	    chart: {
+	        type: 'boxplot'
+	    },
+	    
+	    title: {
+	        text: 'Price distribution change over time'
+	    },
+	    
+	    legend: {
+	        enabled: false
+	    },
+	
+	    xAxis: {
+	        categories: {{list2_1|safe}},   //list2_1
+	        title: {
+	            text: 'date'
+	        }
+	    },
+	    
+	    yAxis: {
+	        title: {
+	            text: 'Observations'
+	        },
+	        
+	    },
+	
+	    series: [{
+	        name: 'Observations',
+	        data: {{list2_2|safe}},   //list2_2
+	        tooltip: {
+	            headerFormat: '<em>Experiment No {point.key}</em><br/>'
+	        }
+	    }]
+	
+	});
+});				
+
+	</script>
+	
+    <script>
+$(function () {
+    $('#image3').highcharts({
+        title: {
+            text: 'Comment num change over time',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: trendata.cn',
+            x: -20
+        },
+        xAxis: {
+            categories: {{list3_1|safe}}    //list3_1
+        },
+        yAxis: {
+            title: {
+                text: 'comment_num'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: 'буC'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Comment',
+            data: {{list3_2}}        //list3_2
+        }]
+    });
+});
+				
+    
+
+	</script>
+  
+    <script>
+		$(function () {
+    $('#image4').highcharts({
+        title: {
+            text: 'max-average-min price of a goods',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: Trendata.cn',
+            x: -20
+        },
+        xAxis: {
+            categories: {{list4_1|safe}}   //list4_1
+        },
+        yAxis: {
+            title: {
+                text: 'price ()'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'max_price',
+            data: {{list4_2|safe}}    //list4_2
+        }, {
+            name: 'aver_price',
+            data: {{list4_3|safe}}    //list4_3
+        }, {
+            name: 'min_price',
+            data: {{list4_4|safe}}    //list4_4
+        }]
+    });
+});
+
+    </script>
+  
+    <script>
+	$(function () {
+    $('#image5').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'comment change over time'
+        },
+        subtitle: {
+            text: 'Source: Trendata'
+        },
+        xAxis: {
+            categories: {{list5_1|safe}}  //list5_1
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'monthly_num'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'comment',
+            data: {{list5_2|safe}}
+        }]
+    });
+});				
+    </script>
+  
+    <script>
+$(function () {
+    var chart,
+        categories = {{list6_1|safe}};  //list6_1
+    $(document).ready(function() {
+        $('#image6').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'positive comment & negtive comment'
+            },
+            subtitle: {
+                text: 'Source: Trendata.cn'
+            },
+            xAxis: [{
+                categories: categories,
+                reversed: false
+            }, { // mirror axis on right side
+                opposite: true,
+                reversed: false,
+                categories: categories,
+                linkedTo: 0
+            }],
+            yAxis: {
+                title: {
+                    text: null
+                },
+                labels: {
+                    formatter: function(){
+                        return (Math.abs(this.value));
+                    }
+                },
+                min: -1,
+                max: 1
+            },
+    
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+    
+            tooltip: {
+                formatter: function(){
+                    return '<b>'+ this.series.name +', age '+ this.point.category +'</b><br/>'+
+                        'Population: '+ Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                }
+            },
+    
+            series: [{
+                name: 'positive',  
+                data: {{list6_2|safe}}  //list6_2
+            }, {
+                name: 'negtive',
+                data: {{list6_3|safe}}   //list6_3
+            }]
+        });
+    });
+    
+});								
+    </script>
+  
+	<script>
+	$(function () {
+    $('#image7').highcharts({
+        chart: {
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'the relationship of price and comment'
+        },
+        subtitle: {
+            text: 'Source: Tredate.cn'
+        },
+        xAxis: [{
+            categories: {{list7_1|safe}}  //list7_1
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                format: '{value}ก็',
+                style: {
+                    color: '#89A54E'
+                }
+            },
+            title: {
+                text: 'price',
+                style: {
+                    color: '#89A54E'
+                }
+            }
+        }, { // Secondary yAxis
+            title: {
+                text: 'comment',
+                style: {
+                    color: '#4572A7'
+                }
+            },
+            labels: {
+                format: '{value} ',
+                style: {
+                    color: '#4572A7'
+                }
+            },
+            opposite: true
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            x: 120,
+            verticalAlign: 'top',
+            y: 100,
+            floating: true,
+            backgroundColor: '#FFFFFF'
+        },
+        series: [{
+            name: 'comment_num',
+            color: '#4572A7',
+            type: 'column',
+            yAxis: 1,
+            data: {{list7_2|safe}},  //list7_2
+            tooltip: {
+                valueSuffix: ''
+            }
+
+        }, {
+            name: 'price',
+            color: '#89A54E',
+            type: 'spline',
+            data: {{list7_3|safe}},  //list7_3
+            tooltip: {
+                valueSuffix: 'ก็'
+            }
+        }]
+    });
+});
+				
+	</script>
+	
+	<script>
+	$(function () {
+    $('#image8').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: 'Star rating statistics'
+        },
+        tooltip: {
+    	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    color: '#000000',
+                    connectorColor: '#000000',
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: {{list8_1|safe}}  //list8_1
+        }]
+    });
+});				
+	</script>
+</head>
+<body id="sub">
+
+<div id="templatemo_wrapper">
+	<div id="templatmeo_header">
+    	
+    </div> <!-- end of header -->
+
+</div>
+
+
+
+<div id="templatemo_footer_wrapper">
+	<div class="col_allw300">
+	 <img src={{picture2}} alt="Image" width="300" height="405"/>
+    </div>
+	<div class="col_allw300">
+			
+        	<h2>商品信息</h2>
+            <ul class="footer_list">
+                <li><h4>商品编号： B00857U1CM </h4>           
+            	<li><h4>商品名称： {{name2}} </h4>
+                <li><h4>商品价格：  {{price2}} </h4>
+                <li><h4>商品特征：  </h4>
+				<ul>
+					<li><h5>{{feature00}},{{feature11}}</h5>
+					<li><h5>{{feature22}}</h5>
+					<li><h5>{{feature33}}</h5>
+					<li><h5>{{feature44}}</h5>
+				</ul> 
+                <li><h4>商品评分：  {{star2}} </h4>
+            </ul>
+    </div>
+    <div class="cleaner"></div>
+</div>
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1>各项统计信息:</h1>
+	<h1> </h1>
+	<h2>价格随时间的走势</h2>
+	<div id="image4" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1> </h1>
+	<h2>销量和价格的关系</h2>
+	<div id="image7" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1> </h1>
+	<h2> 价格分布</h2>
+	<div id="image2" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1> </h1>
+	<h2>评论数随时间的走势</h2>
+	<div id="image3" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1> </h1>
+	<h2>每月评论数</h2>
+	<div id="image5" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1> </h1>
+	<h2>情感分析</h2>
+	<div id="image6" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1> </h1>
+	<h2>星级评分统计</h2>
+	<div id="image8" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1> </h1>
+	<h2>亚马逊和其它商家价格比较</h2>
+	<div id="image1" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+
+<div id="templatemo_copyright_wrapper">
+    <div id="templatemo_copyright">
+    	
+		Copyright 2048 Team Just-Coding
+        
+    </div> <!-- end of templatemo_footer -->
+</div>
+
+</body>
+</html>

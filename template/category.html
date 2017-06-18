@@ -1,0 +1,288 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{{STATIC_URL}}css/templatemo_style.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript" type="text/javascript">
+function clearText(field)
+{
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="{{image}}"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/highcharts.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/highcharts-more.js" ></script>
+<!--<script type="text/javascript" src="{{STATIC_URL}}js/highcharts-3d.js"></script>-->
+  
+    <script>
+﻿$(function () {
+    // Set up the chart
+    var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'image1',
+            type: 'column',
+            margin: 75,
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 15,
+                depth: 50,
+                viewDistance: 25
+            }
+        },
+        title: {
+            text: 'Price_distribute'
+        },
+        plotOptions: {
+            column: {
+                depth: 25
+            }
+        },
+         xAxis: {
+            categories: ['0-50','50-100','100-200','>200']  //category1_1
+        },
+        series: [{
+            data: [611,407,366,14]  
+        }]
+    });
+    
+
+    // Activate the sliders
+    $('#R0').on('change', function(){
+        chart.options.chart.options3d.alpha = this.value;
+        showValues();
+        chart.redraw(false);
+    });
+    $('#R1').on('change', function(){
+        chart.options.chart.options3d.beta = this.value;
+        showValues();
+        chart.redraw(false);
+    });
+
+    function showValues() {
+        $('#R0-value').html(chart.options.chart.options3d.alpha);
+        $('#R1-value').html(chart.options.chart.options3d.beta);
+    }
+    showValues();
+});					
+  </script>
+  
+    <script>
+﻿$(function () {
+    $('#image2').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'comment_num'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: {{category2_1|safe}}  //category2_1
+        }]
+    });
+});				
+
+	</script>
+	
+    <script>
+$(function () {
+    $('#image3').highcharts({
+        title: {
+            text: 'monthly comment',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: trendata.cn',
+            x: -20
+        },
+        xAxis: {
+            categories: {{category3_1|safe}}
+        },
+        yAxis: {
+            title: {
+                text: 'monthly_comment'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: 'буC'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Comment',
+            data: {{category3_2|safe}}
+        }]
+    });
+});
+				
+    
+
+	</script>
+  
+   <script>
+		$(function () {
+    var chart,
+        categories = {{category4_1|safe}};  //category4_1
+    $(document).ready(function() {
+        $('#image4').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'positive and negtive comment'
+            },
+            subtitle: {
+                text: 'Source: Trendata.cn'
+            },
+            xAxis: [{
+                categories: categories,
+                reversed: false
+            }, { // mirror axis on right side
+                opposite: true,
+                reversed: false,
+                categories: categories,
+                linkedTo: 0
+            }],
+            yAxis: {
+                title: {
+                    text: null
+                },
+                labels: {
+                    formatter: function(){
+                        return (Math.abs(this.value));
+                    }
+                },
+                min: -1,
+                max: 1,
+            },
+    
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+    
+            tooltip: {
+                formatter: function(){
+                    return '<b>'+ this.series.name +', age '+ this.point.category +'</b><br/>'+
+                        'Population: '+ Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                }
+            },
+    
+            series: [{
+                name: 'positive',
+                data: {{category4_2|safe}}  //category4_2
+            }, {
+                name: 'negetive',
+                data: {{category4_3|safe}}  //category4_3
+            }]
+        });
+    });
+    
+});				
+</script>
+
+  
+
+</head>
+<body id="sub">
+
+<div id="templatemo_wrapper">
+	<div id="templatmeo_header">
+    	
+    </div> <!-- end of header -->
+
+</div>
+
+
+
+<div id="templatemo_footer_wrapper">
+	<div class="col_allw300">
+	    <h1>商品类别：</h1>
+    </div>
+	<div class="col_allw300">
+			
+        <h2>Clothing & Accessories>Women>Jeans </h2>
+    </div>
+    <div class="cleaner"></div>
+</div>
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1>各项统计信息:</h1>
+	<h1> </h1>
+	<h2>价格分布</h2>
+	<div id="image1" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1> </h1>
+	<h2>该类商品的评论数分布</h2>
+	<div id="image2" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1> </h1>
+	<h2> 每月评论数</h2>
+	<div id="image3" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+
+<div id="templatemo_footer_wrapper">
+	<h1> </h1>
+	<h1> </h1>
+	<h2>情感分析</h2>
+	<div id="image4" style="min-width:700px;height:400px"></div>
+    <div class="cleaner"></div>
+</div>
+
+
+
+
+<div id="templatemo_copyright_wrapper">
+    <div id="templatemo_copyright">
+    	
+		Copyright 2048 Team Just-Coding
+        
+    </div> <!-- end of templatemo_footer -->
+</div>
+
+</body>
+</html>
